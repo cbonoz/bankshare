@@ -1,0 +1,39 @@
+
+.image-block {
+	margin: 0 auto;
+	display: block;
+}
+
+.dashboard-section {
+	min-height: 100vh;
+}
+
+.profile-section {
+	justify-content: center;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.account-button, .invite-button {
+	margin: 20px;
+	padding: 10px;
+}
+
+.dashboard-name {
+	font-weight: bold;
+}
+
+.dashboard-header {
+	font-weight: bold;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.modal-card-body h3 {
+	text-align: left !important;
+}
+
+.modal-card-body p {
+	margin-bottom: 20px;
+	padding: 20px;
+}

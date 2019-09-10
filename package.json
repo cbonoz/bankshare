@@ -1,0 +1,52 @@
+{
+  "name": "my-divjoy-project",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "divjoy"
+  ],
+  "dependencies": {
+    "@toruslabs/torus-embed": "^0.0.28",
+    "analytics": "0.1.19",
+    "analytics-plugin-ga": "0.1.5",
+    "aws-sdk": "2.508.0",
+    "axios": "^0.19.0",
+    "body-parser": "1.19.0",
+    "bulma": "0.7.5",
+    "express": "4.17.1",
+    "fake-auth": "0.0.3",
+    "faker": "^4.1.0",
+    "mailchimp-api-v3": "1.13.1",
+    "node-sass": "4.12.0",
+    "query-string": "6.8.2",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-rotating-text": "^1.4.1",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.0.1",
+    "react-stack-grid": "^0.7.1",
+    "squarelink": "^1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8080"
+}
