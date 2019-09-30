@@ -15,13 +15,13 @@ function FeaturesSection(props) {
               image: "https://uploads.divjoy.com/undraw-mind_map_cwng.svg"
             },
             {
-              title: "Send cryptocurrencies instantly with just an email.",
+              title: "Send Ethereum instantly with just an email.",
               description: "Friend doesn't have a cryptocurrency account? Not a problem, with BankShare we'll automatically create an account for them if needed!",
               image: "https://uploads.divjoy.com/undraw-personal_settings_kihd.svg"
             },
             {
               title: "Celebrate!",
-              description: "You've got money! Invite more friends to the platform and start paying them back the easy way with cryptocurrency.",
+              description: "You've got money! Share your transactions with your network and invite more friends to the platform. Start paying them back the easy way with cryptocurrency.",
               image: "https://uploads.divjoy.com/undraw-having_fun_iais.svg"
             }
           ]}

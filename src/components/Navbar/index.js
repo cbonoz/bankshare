@@ -11,44 +11,6 @@ function Navbar(props) {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-
-    async function initTorus() {
-      if (!window.torus) {
-        const torus = new Torus();
-        await torus.init()
-        window.torus = torus
-        sessionStorage.setItem('pageUsingTorus', true)
-      }
-
-      try {
-        const torus = window.torus
-        if (torus && !auth.user) {
-          const userInfo = await torus.getUserInfo()
-          const email = userInfo.email
-          if (email) {
-            const address = await torus.getPublicAddress(userInfo.email)
-            userInfo['address'] = address
-          }
-          auth.setTorusUser(torus, userInfo)
-        }
-      } catch (e) {
-        console.error('error getting user' ,e)
-        // continue
-      }
-    }
-    initTorus()
-
-    const loc = window.location.pathname
-    if (loc === "/signin" || loc === "/signup" || loc === "/") {
-      if (auth && auth.user) {
-        router.push("/dashboard")
-      }
-    }
-    return () => {
-    };
-  })
-
   return (
     <div>
     <NavbarContainer spaced={props.spaced} color={props.color}>
@@ -73,9 +35,9 @@ function Navbar(props) {
               <Link className="navbar-item" to="/about">
                 About
               </Link>
-              <Link className="navbar-item" to="/contact">
+              {/* <Link className="navbar-item" to="/contact">
                 Contact
-              </Link>
+              </Link> */}
             {auth.user && (
               <div className="navbar-item has-dropdown is-hoverable">
                 <Link className="navbar-link" to="/">
@@ -87,10 +49,10 @@ function Navbar(props) {
                   </Link>
                   <Link
                     className="navbar-item"
-                    to="/signout"
+                    to="/"
                     onClick={e => {
                       e.preventDefault();
-                      auth.signout();
+                      auth.logout();
                       router.push('/')
                     }}
                   >

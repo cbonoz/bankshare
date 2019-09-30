@@ -10,8 +10,8 @@ function AboutPage(props) {
       <ContentSection
         color="primary"
         size="large"
-        title="We help you get and send your money"
-        subtitle="BankShare offers secure payments and crypto storage with minimal overhead."
+        title="We help you get and send Ethereum to your friends."
+        subtitle="Powered by the Torus app framework, BankShare offers the ability to create cryptocurrency wallets and send Ethereum to anyone with a gmail address."
       />
       {showTeam && <TeamBiosSection
         color="white"

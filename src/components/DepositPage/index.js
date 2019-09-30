@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./styles.scss"
 import { useAuth } from "../../util/auth.js"
 import { startContract } from "../../api/index.js"
+import web3Obj from '../../util/torusHelper'
 
 function DepositPage(props) {
   const auth = useAuth()
@@ -10,6 +11,7 @@ function DepositPage(props) {
   const [recipient, setRecipient] = useState("")
   const [address, setAddress] = useState("")
   const [currency, setCurrency] = useState("ETH")
+  const [result, setResult] = useState({})
   const [showCompletedModal, setShowCompletedModal] = useState(false)
 
   const SQ_CODE = process.env.REACT_APP_SQ_CODE
@@ -38,39 +40,29 @@ function DepositPage(props) {
       return
     }
 
-    try {
-      const response = await startContract(
-        "payment",
-        "create",
-        body
-      )
-      console.log("resp", response)
-      // const data = JSON.parse(response)
-    } catch (e) {
-      console.error("error creating payment", e)
-    }
-    setShowCompletedModal(true)
+    const to = address
+    const from = web3Obj.web3.eth.accounts[0]
+    const value = web3Obj.web3.toWei(amount, "ether")
 
-    if (false && SQ_CODE) { //  && !user['profileImage']) {
-      // No gmail auth, use squarelink.
-      const wei = parseFloat(amount) * 1000000 // should be 10**18
-      const url = `https://app.squarelink.com/tx?client_id=${SQ_CODE}&to=${address}&value=${wei}`
-      console.log(url)
-      // window.location.assign(url)
-      return
-    }
+    const doTorusTransaction = async () => {
+      console.log(from, to, value)
+      web3Obj.web3.eth.sendTransaction({
+      from,
+      to,
+      value,
+    }, function(error, hash){
+      console.log(hash)
+      setResult({error, hash})
+      setShowCompletedModal(true)
+    });
+  }
 
-    try {
-    } catch (e) {
-      console.error(e)
-      // error issuing payment - cancel.
-      return
-    }
+    await doTorusTransaction()
 
   }
 
   const validateEmail = async () => {
-    const torus = window.torus
+    const torus = web3Obj.torus
     if (torus) {
       try {
         const address = await torus.getPublicAddress(recipient)
@@ -80,6 +72,8 @@ function DepositPage(props) {
       }
     }
   }
+
+  const { error, hash} = result
 
   return (
     <div className="deposit-section">
@@ -131,7 +125,7 @@ function DepositPage(props) {
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">You completed a payment!</p>
+              <p className="modal-card-title">Bankshare Payment Status</p>
               <button
                 className="delete"
                 aria-label="close"
@@ -139,14 +133,21 @@ function DepositPage(props) {
               ></button>
             </header>
             <section className="modal-card-body">
-              <p>
-                You successfully sent {amount} {currency} to {recipient}.<br />
-                The user can access their funds, bank-free, by going to{" "}
-                <a href="app.tor.us" target="_blank">
-                  app.tor.us
-                </a>{" "}
-                and logging in with that same email.
-              </p>
+                {error && <div>
+                  Error sending payment: {error}
+                </div>}
+
+                {hash && !error && <div>
+                <p>
+                  You successfully sent {amount} {currency} to {recipient}!<br />
+                  The user can access their funds, bank-free, by going to{" "}
+                  <a href="app.tor.us" target="_blank">
+                    app.tor.us
+                  </a>{" "}
+                  and logging in with that same email.
+                </p>
+                <p>Transaction hash: {hash}</p>
+              </div>}
             </section>
             <footer className="modal-card-foot">
               <button

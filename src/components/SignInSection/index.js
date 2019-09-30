@@ -17,7 +17,7 @@ function SignInSection(props) {
 
   return (
     <div color={props.color} size={props.size}>
-      <div className="container">
+      <div className="container signin-container">
         <div className='image-block'>
           <img src={logo} className='centered image-block'/>
         </div>
