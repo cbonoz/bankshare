@@ -26,7 +26,7 @@ function Footer(props) {
                     to="/"
                     onClick={e => {
                       e.preventDefault();
-                      auth.logout();
+                      // auth.logout();
                       router.push('/')
                     }}
                   >
